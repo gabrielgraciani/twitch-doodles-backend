@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import copypastasRouter from './copypastas.routes';
+import copyPastasRouter from './copyPastas.routes';
 
 const routes = Router();
 
-routes.use('/copypastas', copypastasRouter);
+routes.use('/copypastas', copyPastasRouter);
 
 export default routes;

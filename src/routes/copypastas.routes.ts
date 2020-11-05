@@ -1,15 +1,21 @@
 import { Router } from 'express';
-import CopyPasta from '../models/CopyPasta';
+import CopyPastasRepository from '../repositories/CopyPastasRepositories';
 
-const copypastasRouter = Router();
-const copyPastas: CopyPasta[] = [];
+const copyPastasRouter = Router();
+const copyPastasRepository = new CopyPastasRepository();
 
-copypastasRouter.post('/', (req, res) => {
+copyPastasRouter.get('/', (req, res) => {
+  const copyPastas = copyPastasRepository.all();
+
+  return res.json(copyPastas);
+});
+
+copyPastasRouter.post('/', (req, res) => {
   const { name, content, date } = req.body;
-  const copyPasta = new CopyPasta(name, content, date);
 
-  copyPastas.push(copyPasta);
+  const copyPasta = copyPastasRepository.create(name, content, date);
+
   return res.json(copyPasta);
 });
 
-export default copypastasRouter;
+export default copyPastasRouter;
