@@ -9,7 +9,7 @@ class CopyPasta {
 
   date: Date;
 
-  constructor(name: string, content: string, date: Date) {
+  constructor({ name, content, date }: Omit<CopyPasta, 'id'>) {
     this.id = uuid();
     this.name = name;
     this.content = content;

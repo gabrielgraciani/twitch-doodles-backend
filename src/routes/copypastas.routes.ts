@@ -13,7 +13,7 @@ copyPastasRouter.get('/', (req, res) => {
 copyPastasRouter.post('/', (req, res) => {
   const { name, content, date } = req.body;
 
-  const copyPasta = copyPastasRepository.create(name, content, date);
+  const copyPasta = copyPastasRepository.create({ name, content, date });
 
   return res.json(copyPasta);
 });
