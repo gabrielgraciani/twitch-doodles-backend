@@ -1,21 +1,30 @@
 import { Router } from 'express';
+import { getCustomRepository } from 'typeorm';
+
 import CopyPastasRepository from '../repositories/CopyPastasRepositories';
+import CreateCopyPastaService from '../services/CreateCopyPastaService';
 
 const copyPastasRouter = Router();
-const copyPastasRepository = new CopyPastasRepository();
 
-copyPastasRouter.get('/', (req, res) => {
-  const copyPastas = copyPastasRepository.all();
+copyPastasRouter.get('/', async (req, res) => {
+  const copyPastasRepository = getCustomRepository(CopyPastasRepository);
+  const copyPastas = await copyPastasRepository.find();
 
   return res.json(copyPastas);
 });
 
-copyPastasRouter.post('/', (req, res) => {
-  const { name, content, date } = req.body;
+copyPastasRouter.post('/', async (req, res) => {
+  try {
+    const { name, content, date } = req.body;
 
-  const copyPasta = copyPastasRepository.create({ name, content, date });
+    const createCopyPasta = new CreateCopyPastaService();
 
-  return res.json(copyPasta);
+    const copyPasta = await createCopyPasta.execute({ name, content, date });
+
+    return res.json(copyPasta);
+  } catch (err) {
+    return res.status(400).json({ error: err.message });
+  }
 });
 
 export default copyPastasRouter;

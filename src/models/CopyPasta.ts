@@ -1,20 +1,18 @@
-import { v4 as uuid } from 'uuid';
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
+@Entity('copy_pastas')
 class CopyPasta {
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
+  @Column()
   name: string;
 
+  @Column()
   content: string;
 
+  @Column('timestamp with time zone')
   date: Date;
-
-  constructor({ name, content, date }: Omit<CopyPasta, 'id'>) {
-    this.id = uuid();
-    this.name = name;
-    this.content = content;
-    this.date = date;
-  }
 }
 
 export default CopyPasta;
