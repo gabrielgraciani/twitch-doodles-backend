@@ -15,11 +15,16 @@ copyPastasRouter.get('/', async (req, res) => {
 
 copyPastasRouter.post('/', async (req, res) => {
   try {
-    const { name, content, date } = req.body;
+    const { name, content, date, categories } = req.body;
 
     const createCopyPasta = new CreateCopyPastaService();
 
-    const copyPasta = await createCopyPasta.execute({ name, content, date });
+    const copyPasta = await createCopyPasta.execute({
+      name,
+      content,
+      date,
+      categories,
+    });
 
     return res.json(copyPasta);
   } catch (err) {

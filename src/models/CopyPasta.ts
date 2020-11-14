@@ -11,6 +11,9 @@ class CopyPasta {
   @Column()
   content: string;
 
+  @Column()
+  categories: string;
+
   @Column('timestamp with time zone')
   date: Date;
 }

@@ -7,12 +7,23 @@ interface Request {
   name: string;
   content: string;
   date: Date;
+  categories: string;
 }
 
 class CreateCopyPastaService {
-  public async execute({ name, content, date }: Request): Promise<CopyPasta> {
+  public async execute({
+    name,
+    content,
+    date,
+    categories,
+  }: Request): Promise<CopyPasta> {
     const copyPastasRepository = getCustomRepository(CopyPastasRepository);
-    const copyPasta = copyPastasRepository.create({ name, content, date });
+    const copyPasta = copyPastasRepository.create({
+      name,
+      content,
+      date,
+      categories,
+    });
 
     await copyPastasRepository.save(copyPasta);
     return copyPasta;

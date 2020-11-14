@@ -25,6 +25,11 @@ export default class CreateCopyPastas1604620249926
             isNullable: false,
           },
           {
+            name: 'categories',
+            type: 'varchar',
+            isNullable: true,
+          },
+          {
             name: 'date',
             type: 'timestamp with time zone',
             isNullable: false,
