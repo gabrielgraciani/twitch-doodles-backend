@@ -3,6 +3,7 @@ import { getCustomRepository } from 'typeorm';
 
 import CopyPastasRepository from '../repositories/CopyPastasRepositories';
 import CreateCopyPastaService from '../services/CreateCopyPastaService';
+import DeleteAllCopyPastaService from '../services/DeleteAllCopyPastaService';
 
 const copyPastasRouter = Router();
 
@@ -25,6 +26,20 @@ copyPastasRouter.post('/', async (req, res) => {
       date,
       categories,
     });
+
+    return res.json(copyPasta);
+  } catch (err) {
+    return res.status(400).json({ error: err.message });
+  }
+});
+
+copyPastasRouter.delete('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const deleteAllCopyPasta = new DeleteAllCopyPastaService();
+
+    const copyPasta = await deleteAllCopyPasta.execute(id);
 
     return res.json(copyPasta);
   } catch (err) {
