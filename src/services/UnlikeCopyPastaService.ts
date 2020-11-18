@@ -1,9 +1,10 @@
 import { getCustomRepository } from 'typeorm';
 
+import CopyPasta from '../models/CopyPasta';
 import CopyPastasRepository from '../repositories/CopyPastasRepositories';
 
 class UnlikeCopyPastaService {
-  public async execute(copyPastaId: string): Promise<{ message: string }> {
+  public async execute(copyPastaId: string): Promise<CopyPasta | undefined> {
     const copyPastasRepository = getCustomRepository(CopyPastasRepository);
 
     const findCopyPasta = await copyPastasRepository.findOne({
@@ -18,11 +19,11 @@ class UnlikeCopyPastaService {
       }
       const updatedCopyPasta = findCopyPasta;
 
-      await copyPastasRepository.save(updatedCopyPasta);
-      return { message: 'successfully unliked' };
+      const copyPasta = await copyPastasRepository.save(updatedCopyPasta);
+      return copyPasta;
     }
 
-    return { message: 'error on unlike a copyPasta' };
+    return undefined;
   }
 }
 
