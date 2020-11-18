@@ -14,6 +14,9 @@ class CopyPasta {
   @Column()
   categories: string;
 
+  @Column()
+  likes: number;
+
   @Column('timestamp with time zone')
   date: Date;
 }

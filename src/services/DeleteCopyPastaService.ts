@@ -2,16 +2,16 @@ import { getCustomRepository } from 'typeorm';
 
 import CopyPastasRepository from '../repositories/CopyPastasRepositories';
 
-class DeleteAllCopyPastaService {
-  public async execute(id: string): Promise<null> {
+class DeleteCopyPastaService {
+  public async execute(id: string): Promise<{ message: string }> {
     const copyPastasRepository = getCustomRepository(CopyPastasRepository);
 
     await copyPastasRepository.delete({
       id,
     });
 
-    return null;
+    return { message: 'successfully deleted' };
   }
 }
 
-export default DeleteAllCopyPastaService;
+export default DeleteCopyPastaService;

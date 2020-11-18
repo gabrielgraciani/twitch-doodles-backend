@@ -3,7 +3,9 @@ import { getCustomRepository } from 'typeorm';
 
 import CopyPastasRepository from '../repositories/CopyPastasRepositories';
 import CreateCopyPastaService from '../services/CreateCopyPastaService';
-import DeleteAllCopyPastaService from '../services/DeleteAllCopyPastaService';
+import DeleteCopyPastaService from '../services/DeleteCopyPastaService';
+import LikeCopyPastaService from '../services/LikeCopyPastaService';
+import UnlikeCopyPastaService from '../services/UnlikeCopyPastaService';
 
 const copyPastasRouter = Router();
 
@@ -37,11 +39,39 @@ copyPastasRouter.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params;
 
-    const deleteAllCopyPasta = new DeleteAllCopyPastaService();
+    const deleteCopyPasta = new DeleteCopyPastaService();
 
-    const copyPasta = await deleteAllCopyPasta.execute(id);
+    const copyPasta = await deleteCopyPasta.execute(id);
 
     return res.json(copyPasta);
+  } catch (err) {
+    return res.status(400).json({ error: err.message });
+  }
+});
+
+copyPastasRouter.post('/like/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const likeCopyPasta = new LikeCopyPastaService();
+
+    const responseLikeCopyPasta = await likeCopyPasta.execute(id);
+
+    return res.json(responseLikeCopyPasta);
+  } catch (err) {
+    return res.status(400).json({ error: err.message });
+  }
+});
+
+copyPastasRouter.post('/unlike/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const unlikeCopyPasta = new UnlikeCopyPastaService();
+
+    const responseUnlikeCopyPasta = await unlikeCopyPasta.execute(id);
+
+    return res.json(responseUnlikeCopyPasta);
   } catch (err) {
     return res.status(400).json({ error: err.message });
   }

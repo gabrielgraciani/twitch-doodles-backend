@@ -30,6 +30,11 @@ export default class CreateCopyPastas1604620249926
             isNullable: true,
           },
           {
+            name: 'likes',
+            type: 'integer',
+            isNullable: true,
+          },
+          {
             name: 'date',
             type: 'timestamp with time zone',
             isNullable: false,

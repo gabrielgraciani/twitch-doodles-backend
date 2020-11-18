@@ -8,6 +8,7 @@ interface Request {
   content: string;
   date: Date;
   categories: string;
+  likes?: number;
 }
 
 class CreateCopyPastaService {
@@ -16,6 +17,7 @@ class CreateCopyPastaService {
     content,
     date,
     categories,
+    likes = 0,
   }: Request): Promise<CopyPasta> {
     const copyPastasRepository = getCustomRepository(CopyPastasRepository);
     const copyPasta = copyPastasRepository.create({
@@ -23,6 +25,7 @@ class CreateCopyPastaService {
       content,
       date,
       categories,
+      likes,
     });
 
     await copyPastasRepository.save(copyPasta);
