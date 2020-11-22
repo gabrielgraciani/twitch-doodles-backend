@@ -11,7 +11,9 @@ const copyPastasRouter = Router();
 
 copyPastasRouter.get('/', async (req, res) => {
   const copyPastasRepository = getCustomRepository(CopyPastasRepository);
-  const copyPastas = await copyPastasRepository.find();
+  const copyPastas = await copyPastasRepository.find({
+    order: { date: 'DESC' },
+  });
 
   return res.json(copyPastas);
 });
