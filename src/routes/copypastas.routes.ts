@@ -22,7 +22,7 @@ copyPastasRouter.get('/popular', async (req, res) => {
   const copyPastasRepository = getCustomRepository(CopyPastasRepository);
   const copyPastas = await copyPastasRepository.find({
     order: { likes: 'DESC' },
-    take: 3,
+    take: 5,
   });
 
   return res.json(copyPastas);
