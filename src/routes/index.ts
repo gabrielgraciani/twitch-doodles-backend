@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import copyPastasRouter from './copyPastas.routes';
+import copyPastasRouter from './copyPastasRoutes';
 
 const routes = Router();
 
