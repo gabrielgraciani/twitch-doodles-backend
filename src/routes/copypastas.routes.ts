@@ -18,16 +18,6 @@ copyPastasRouter.get('/', async (req, res) => {
   return res.json(copyPastas);
 });
 
-copyPastasRouter.get('/popular', async (req, res) => {
-  const copyPastasRepository = getCustomRepository(CopyPastasRepository);
-  const copyPastas = await copyPastasRepository.find({
-    order: { likes: 'DESC' },
-    take: 5,
-  });
-
-  return res.json(copyPastas);
-});
-
 copyPastasRouter.post('/', async (req, res) => {
   try {
     const { name, content, date, categories } = req.body;
